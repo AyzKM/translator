@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Lemma, WordEncounter, Forms
+from .models import Lemma, WordEncounter, WordForms
 
 admin.site.register(Lemma)
 admin.site.register(WordEncounter)
-admin.site.register(Forms)
+admin.site.register(WordForms)

@@ -1,20 +1,25 @@
 from django.db import models
 from django.db.models.fields import TextField
+from django.utils import translation
 from users.models import User
+
+#from en to kg
 
 class Lemma(models.Model):
     lemma = models.TextField()
     definition = models.TextField()
     frequency_rank = models.IntegerField(null=True, blank=True)
-    lang = models.TextField() 
+    lang = models.TextField()
+    translation = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.lemma
 
-class Forms(models.Model):
+class WordForms(models.Model):
     word = models.ForeignKey(to=Lemma, on_delete=models.CASCADE)
     form = models.TextField()
     lang = models.TextField() 
+    translation = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.form
@@ -23,6 +28,10 @@ class Forms(models.Model):
         verbose_name = "Form"
         verbose_name_plural = "Forms"
 
+class InputSentences(models.Model):
+    sentence = models.TextField()
+    lang = models.TextField()
+
 class WordEncounter(models.Model):
     CONTEXT = [
         (1, 'business'),
@@ -30,9 +39,11 @@ class WordEncounter(models.Model):
         (3, 'literary'),
     ]
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='word_encounter')
-    form = models.ForeignKey(to=Forms, on_delete=models.CASCADE)
+    form = models.ForeignKey(to=WordForms, on_delete=models.CASCADE)
     sentence = models.TextField()
     context = models.IntegerField(choices=CONTEXT)
 
     def __str__(self):
         return self.sentence
+
+
