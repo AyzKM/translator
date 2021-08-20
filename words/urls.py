@@ -3,7 +3,9 @@ from .views import *
 
 urlpatterns = [
     path('', LemmaListAPIView.as_view(), name='words'),
-    path('sentence', WordFormsListCreateAPIView.as_view(), name='sentence')
+    path('form', WordFormsListCreateAPIView.as_view(), name='form'),
+    path('sentence', InputSentenceCreateAPIVew.as_view(), name='sentence')
+
     # path('<int:pk>/', )
 ]
 

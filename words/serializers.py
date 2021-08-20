@@ -17,4 +17,4 @@ class WordFormsSerializer(serializers.ModelSerializer):
 class InputSentenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = InputSentences
-        fields = '__all__'
+        fields = ['sentence']
