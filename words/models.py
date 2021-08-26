@@ -16,10 +16,11 @@ class Lemma(models.Model):
         return self.lemma
 
 class WordForms(models.Model):
-    word = models.ForeignKey(to=Lemma, on_delete=models.CASCADE)
-    form = models.TextField()
-    lang = models.TextField() 
+    lemma = models.ForeignKey(to=Lemma, on_delete=models.CASCADE, null=True, blank=True)
+    form = models.TextField(null=True, blank=True)
+    lang = models.TextField(null=True, blank=True) 
     translation = models.TextField(null=True, blank=True)
+    sentence = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.form
@@ -27,10 +28,6 @@ class WordForms(models.Model):
     class Meta:
         verbose_name = "Form"
         verbose_name_plural = "Forms"
-
-class InputSentences(models.Model):
-    sentence = models.TextField()
-    lang = models.TextField()
 
 class WordEncounter(models.Model):
     CONTEXT = [

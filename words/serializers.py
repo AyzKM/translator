@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Lemma, WordForms, InputSentences
+from .models import Lemma, WordForms
 
 User = get_user_model()
 
@@ -14,7 +14,4 @@ class WordFormsSerializer(serializers.ModelSerializer):
         model = WordForms
         fields = '__all__'
 
-class InputSentenceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = InputSentences
-        fields = ['sentence']
+
