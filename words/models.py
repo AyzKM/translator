@@ -20,7 +20,6 @@ class WordForms(models.Model):
     form = models.TextField(null=True, blank=True)
     lang = models.TextField(null=True, blank=True) 
     translation = models.TextField(null=True, blank=True)
-    sentence = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.form
@@ -30,17 +29,17 @@ class WordForms(models.Model):
         verbose_name_plural = "Forms"
 
 class WordEncounter(models.Model):
-    CONTEXT = [
-        (1, 'business'),
-        (2, 'academic'),
-        (3, 'literary'),
-    ]
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='word_encounter')
-    form = models.ForeignKey(to=WordForms, on_delete=models.CASCADE)
-    sentence = models.TextField()
-    context = models.IntegerField(choices=CONTEXT)
+    # CONTEXT = [
+    #     (1, 'business'),
+    #     (2, 'academic'),
+    #     (3, 'literary'),
+    # ]
+    # context = models.IntegerField(choices=CONTEXT, null=True, blank=True)
 
-    def __str__(self):
-        return self.sentence
+    encounter = models.IntegerField()
+    status = models.BooleanField(default=False)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='word_encounter')
+    word_form = models.ForeignKey(to=WordForms, on_delete=models.CASCADE)
+
 
 
