@@ -13,9 +13,12 @@ class LemmaListViewSet(viewsets.ModelViewSet):
 class WordEncounterViewSet(viewsets.ModelViewSet):
     queryset = WordEncounter.objects.all()
     serializer_class = WordEncounterSerializer
-    obj_status = WordEncounter.objects.filter(encounter__gte=5)
-    if obj_status:
-        WordEncounter.objects.filter(encounter__gte=5).update(status=True)
+
+    def get_queryset(self):
+        if self.queryset.filter(encounter__gte=5):
+            self.queryset.filter(encounter__gte=5).update(status=True)
+            return self.queryset
+
         
 
 class WordFormViewSet(viewsets.ModelViewSet):

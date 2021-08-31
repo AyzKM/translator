@@ -10,12 +10,15 @@ class LemmaSerializer(serializers.ModelSerializer):
         model = Lemma
         fields = '__all__'
 
-class WordFormsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WordForms
-        fields = '__all__'
-
 class WordEncounterSerializer(serializers.ModelSerializer):
     class Meta:
         model = WordEncounter
         fields = '__all__'
+
+class WordFormsSerializer(serializers.ModelSerializer):
+
+    word_encounter = WordEncounterSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = WordForms
+        fields = ['form', 'translation', 'word_encounter']

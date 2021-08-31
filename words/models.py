@@ -37,9 +37,9 @@ class WordEncounter(models.Model):
     # context = models.IntegerField(choices=CONTEXT, null=True, blank=True)
 
     encounter = models.IntegerField()
-    status = models.BooleanField(default=False)
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='word_encounter')
-    word_form = models.ForeignKey(to=WordForms, on_delete=models.CASCADE)
+    knowing_status = models.BooleanField(default=False)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, )
+    word_form = models.ForeignKey(to=WordForms, on_delete=models.CASCADE, related_name='word_encounter')
 
 
 
